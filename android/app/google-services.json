@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "450068562371",
+    "project_id": "xullo-production",
+    "storage_bucket": "xullo-production.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:450068562371:android:0cbe6dc3f4d2ba71637d76",
+        "android_client_info": {
+          "package_name": "com.eio.xullo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCbB6oV5eJJdi7_h1RWBgQgrTTXrn6a_gI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
