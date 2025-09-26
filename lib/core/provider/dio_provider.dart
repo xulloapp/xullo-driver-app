@@ -18,7 +18,7 @@ final dioProvider = Provider<Dio>((ref) {
   final dio = Dio(BaseOptions(
     baseUrl: kReleaseMode
         ? 'https://api.xullo.co.nz' // Release
-        : 'http://192.168.29.214:3333', // Debug
+        : 'http://192.168.1.5:3333', // Debug
     connectTimeout: const Duration(seconds: 10),
     receiveTimeout: const Duration(seconds: 10),
     headers: {'Content-Type': 'application/json'},

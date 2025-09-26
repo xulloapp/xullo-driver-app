@@ -134,6 +134,7 @@ class ForgetpasswordScreen extends HookConsumerWidget {
                 children: [
                   CustomTextField.number(
                     name: "otp",
+                    allCapital: true,
                     validators: AppValidators.pin,
                     hintText: "OTP",
                     maxLength: 6,

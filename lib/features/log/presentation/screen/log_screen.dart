@@ -88,30 +88,29 @@ class LogScreen extends HookConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: Center(child: Text("Trip details")),
-        leading:     TextButton(
-          onPressed:  !isFinishLoading.value ? () {
-            ref.read(logNotifierProvider.notifier).finishLog(extra);
-          } : null ,
-          child: isFinishLoading.value ? SizedBox(
-            width: 20, // Set desired width
-            height: 20, // Set desired height
-            child: CircularProgressIndicator(
-              strokeWidth: 2, // Optional: makes the circle thinner
-              color: Theme.of(context).colorScheme.inversePrimary,
-            ),
-          ) :  Text("STOP",style: TextStyle(
-              color: Theme.of(context).colorScheme.error,
-            fontSize: 12
-          ),),
+        leading: IconButton(
+          onPressed:  (){
+            context.go(RouteNames.dashboard);
+          },
+          icon: Icon(Icons.arrow_back)
         ),
         actions: [
-          TextButton(onPressed: (){
-            context.go(RouteNames.dashboard);
-
-          }, child: Text("DASHBOARD",style: TextStyle(
-              color: Colors.grey.shade800,
-              fontSize: 12
-          )),),
+          TextButton(
+            onPressed:  !isFinishLoading.value ? () {
+              ref.read(logNotifierProvider.notifier).finishLog(extra);
+            } : null ,
+            child: isFinishLoading.value ? SizedBox(
+              width: 20, // Set desired width
+              height: 20, // Set desired height
+              child: CircularProgressIndicator(
+                strokeWidth: 2, // Optional: makes the circle thinner
+                color: Theme.of(context).colorScheme.inversePrimary,
+              ),
+            ) :  Text("FINISH",style: TextStyle(
+                color: Theme.of(context).colorScheme.error,
+                fontSize: 12
+            ),),
+          ),
         ],
       ),
       body: isLoading.value
@@ -275,30 +274,55 @@ class LogScreen extends HookConsumerWidget {
           ],
         ),
       ),
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.only(bottom: 32 , left: 16, right: 16),
-        child: Row(
-          children: [
-            Expanded(
-              child: ElevatedButton(
-                onPressed: !isFinishLoading.value ? () {
-                  // Left button action
-                  context.push(RouteNames.logForm, extra: LogFormArgs(trip_id: extra));
-                } : null,
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Theme.of(context).colorScheme.primary,
-                  foregroundColor: Theme.of(context).colorScheme.inversePrimary,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12), // rounded corners
+        bottomNavigationBar: Padding(
+          padding: const EdgeInsets.only(bottom: 32, left: 16, right: 16),
+          child: Row(
+            children: [
+              // First button
+              Expanded(
+                child: ElevatedButton(
+                  onPressed: !isFinishLoading.value
+                      ? () {
+                    // Left button action
+                    context.push(RouteNames.logForm,
+                        extra: LogFormArgs(trip_id: extra));
+                  }
+                      : null,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Theme.of(context).colorScheme.primary,
+                    foregroundColor: Theme.of(context).colorScheme.inversePrimary,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    padding: const EdgeInsets.symmetric(vertical: 20),
                   ),
-                  padding: const EdgeInsets.symmetric(vertical: 20), // square-ish
+                  child: const Text("Add log"),
                 ),
-                child: const Text("Add log"),
               ),
-            ),
-          ],
+              const SizedBox(width: 16), // Space between buttons
+              // Second button
+              Expanded(
+                child: ElevatedButton(
+                  onPressed: !isFinishLoading.value
+                      ? () {
+                    // Right button action
+                    context.push(RouteNames.dashboard);
+                  }
+                      : null,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Theme.of(context).colorScheme.secondary,
+                    foregroundColor: Theme.of(context).colorScheme.onSecondary,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    padding: const EdgeInsets.symmetric(vertical: 20),
+                  ),
+                  child: const Text("Dashboard"),
+                ),
+              ),
+            ],
+          ),
         ),
-      ),
     );
   }
 }

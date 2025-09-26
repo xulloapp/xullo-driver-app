@@ -15,6 +15,7 @@ class CustomTextField extends HookWidget {
   final TextInputType inputType;
   final List<TextInputFormatter>? inputFormatters;
   final int? maxLength;
+  final bool allCapital;
 
   const CustomTextField({
     super.key,
@@ -26,6 +27,7 @@ class CustomTextField extends HookWidget {
     this.inputType = TextInputType.text,
     this.inputFormatters,
     this.maxLength,
+    this.allCapital = false
   });
 
   /// Shortcut constructor for number-only input
@@ -37,6 +39,7 @@ class CustomTextField extends HookWidget {
     required this.validators,
     this.obscureText = false,
     this.maxLength,
+    this.allCapital = false
   })  : inputType = TextInputType.number,
         inputFormatters = [FilteringTextInputFormatter.digitsOnly];
 
@@ -75,7 +78,7 @@ class CustomTextField extends HookWidget {
           borderRadius: BorderRadius.circular(12),
         ),
         hintText: hintText,
-        label: Text(prettifyLabel(name)),
+        label: Text(allCapital ?  name.toUpperCase() : prettifyLabel(name)),
         hintStyle: TextStyle(
           color: theme.primary.withOpacity(0.8),
         ),
